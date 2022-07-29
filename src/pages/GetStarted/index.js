@@ -60,10 +60,15 @@ export default function GetStarted({ navigation }) {
           source={require('../../assets/logo.png')}
           style={{
             resizeMode: 'contain',
-            height: 250,
+            height: 120,
           }}
         />
-
+        <Text style={{
+          fontFamily: fonts.primary.normal,
+          color: colors.white,
+          fontSize: windowWidth / 12,
+          marginVertical: 10,
+        }}>CHANYA DIO</Text>
 
 
       </View>

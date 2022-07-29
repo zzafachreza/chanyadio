@@ -26,7 +26,7 @@ export default function Splash({ navigation }) {
   const scaleRadius = new Animated.Value(0);
 
   Animated.timing(scaleLogo, {
-    toValue: 1,
+    toValue: 120,
     duration: 1000,
   }).start();
 
@@ -73,12 +73,18 @@ export default function Splash({ navigation }) {
         <Animated.Image
           source={require('../../assets/logo.png')}
           style={{
+            width: '100%',
             resizeMode: 'contain',
-            // resizeMode: 'center',
-            height: 250,
-            aspectRatio: scaleLogo,
+            height: scaleLogo,
+            // aspectRatio: scaleLogo,
           }}
         />
+        <Text style={{
+          fontFamily: fonts.primary.normal,
+          color: colors.white,
+          fontSize: windowWidth / 12,
+          marginVertical: 10,
+        }}>CHANYA DIO</Text>
         <ActivityIndicator size="large" color={colors.white} />
       </ImageBackground>
     </SafeAreaView>

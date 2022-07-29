@@ -107,9 +107,15 @@ export default function Login({ navigation }) {
             source={require('../../assets/logo.png')}
             style={{
               resizeMode: 'contain',
-              aspectRatio: 1,
+              height: 120,
             }}
           />
+          <Text style={{
+            fontFamily: fonts.primary.normal,
+            color: colors.white,
+            fontSize: windowWidth / 12,
+            marginVertical: 10,
+          }}>CHANYA DIO</Text>
         </View>
         <View style={styles.page}>
           <Text

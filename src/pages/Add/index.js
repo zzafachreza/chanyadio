@@ -50,19 +50,38 @@ export default function ({ navigation, route }) {
         <SafeAreaView style={{
             flex: 1,
             padding: 10,
-            justifyContent: 'center',
+            backgroundColor: colors.primary,
         }}>
 
-
-            <MyInput value={kirim.email} onChangeText={x => {
-                setKirim({
-                    ...kirim,
-                    email: x
-                })
-            }} autoFocus label="Masukan Email" iconname="mail" />
-            <MyGap jarak={10} />
-            {!loading && <MyButton onPress={__sendServer} title="Reset Password" Icons="cloud-upload-outline" warna={colors.primary} />}
-            {loading && <ActivityIndicator color={colors.secondary} size="large" />}
+            <View style={{
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <Image
+                    source={require('../../assets/logo.png')}
+                    style={{
+                        resizeMode: 'contain',
+                        height: 120,
+                    }}
+                />
+                <Text style={{
+                    fontFamily: fonts.primary.normal,
+                    color: colors.white,
+                    fontSize: windowWidth / 12,
+                    marginVertical: 10,
+                }}>CHANYA DIO</Text>
+            </View>
+            <View>
+                <MyInput value={kirim.email} onChangeText={x => {
+                    setKirim({
+                        ...kirim,
+                        email: x
+                    })
+                }} autoFocus label="Masukan Email" iconname="mail" placeholder="masukan email anda" />
+                <MyGap jarak={10} />
+                {!loading && <MyButton onPress={__sendServer} title="Reset Password" iconColor={colors.primary} colorText={colors.primary} Icons="cloud-upload-outline" warna={colors.white} />}
+                {loading && <ActivityIndicator color={colors.white} size="large" />}
+            </View>
 
         </SafeAreaView >
     )

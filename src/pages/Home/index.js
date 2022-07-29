@@ -53,7 +53,7 @@ export default function Home({ navigation }) {
 
       // alert(obj.notification.title)
 
-
+      __getDataUserInfo();
 
       PushNotification.localNotification({
         /* Android Only Properties */
@@ -130,8 +130,10 @@ export default function Home({ navigation }) {
 
   const __renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={{
+      <TouchableOpacity onPress={() => navigation.navigate('Brand', item)} style={{
+        elevation: 3,
         flex: 1,
+        overflow: 'hidden',
         marginVertical: 10,
         marginHorizontal: 10,
         borderRadius: 10,
@@ -150,12 +152,20 @@ export default function Home({ navigation }) {
         }}>
 
         </View>
-        <Text style={{
-          textAlign: 'right',
-          color: colors.secondary,
-          fontFamily: fonts.secondary[600],
-          fontSize: windowWidth / 25,
-        }}>{item.judul}</Text>
+        <View style={{
+          padding: 10,
+        }}>
+          <Text style={{
+            color: colors.secondary,
+            fontFamily: fonts.primary.normal,
+            fontSize: windowWidth / 20,
+          }}>{item.judul}</Text>
+          <Text style={{
+            color: colors.secondary,
+            fontFamily: fonts.secondary[400],
+            fontSize: windowWidth / 25,
+          }}>{item.periode}</Text>
+        </View>
       </TouchableOpacity>
     )
   }
@@ -190,16 +200,18 @@ export default function Home({ navigation }) {
                 color: colors.white
               }}>Selamat datang !</Text>
               <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: windowWidth / 12,
+                fontFamily: fonts.primary.normal,
+                fontSize: windowWidth / 10,
                 color: colors.white
               }}>Chanya Dio</Text>
             </View>
             <View style={{
+              justifyContent: 'center',
+              alignItems: 'center'
             }}>
               <Image source={require('../../assets/logo.png')} style={{
                 width: 70,
-                height: 70
+                height: 40
               }} />
             </View>
           </View>
@@ -295,8 +307,8 @@ export default function Home({ navigation }) {
               marginTop: 10,
               textAlign: 'center',
               color: colors.primary,
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 25,
+              fontFamily: fonts.primary.normal,
+              fontSize: windowWidth / 20,
             }}>QR Code</Text>
           </View>
 
@@ -314,8 +326,8 @@ export default function Home({ navigation }) {
               marginTop: 10,
               textAlign: 'center',
               color: colors.primary,
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 25,
+              fontFamily: fonts.primary.normal,
+              fontSize: windowWidth / 20,
             }}>Redeem</Text>
           </View>
 
@@ -333,8 +345,8 @@ export default function Home({ navigation }) {
               marginTop: 10,
               textAlign: 'center',
               color: colors.primary,
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 25,
+              fontFamily: fonts.primary.normal,
+              fontSize: windowWidth / 20,
             }}>History</Text>
           </View>
         </View>
@@ -366,15 +378,14 @@ export default function Home({ navigation }) {
       <Modalize
         withHandle={false}
         scrollViewProps={{ showsVerticalScrollIndicator: false }}
-        snapPoint={windowHeight / 1.5}
+        snapPoint={windowHeight / 1.8}
         HeaderComponent={
-          <View style={{ padding: 10 }}>
+          <View style={{ padding: 10, flexDirection: 'column' }}>
             <View style={{ flexDirection: 'row' }}>
-
               <View style={{ flex: 1, justifyContent: 'center' }}>
                 <Text
                   style={{
-                    fontFamily: fonts.secondary[600],
+                    fontFamily: fonts.primary.normal,
                     fontSize: windowWidth / 20,
                     color: colors.black,
                   }}>
@@ -382,7 +393,7 @@ export default function Home({ navigation }) {
                 </Text>
                 <Text
                   style={{
-                    fontFamily: fonts.secondary[400],
+                    fontFamily: fonts.primary[400],
                     fontSize: windowWidth / 30,
                     color: colors.black,
                   }}>
