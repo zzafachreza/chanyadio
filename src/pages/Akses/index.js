@@ -1,90 +1,115 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { colors } from '../../utils/colors';
-import { windowWidth, fonts } from '../../utils/fonts';
 
-export default function Akses({ navigation, route }) {
+import React, { useState } from 'react'
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Linking,
+  View
+} from 'react-native';
+
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
+import { Icon } from 'react-native-elements'
+import axios from 'axios';
+import { colors } from '../../utils/colors';
+import { fonts, windowWidth } from '../../utils/fonts';
+import { storeData, urlAPI } from '../../utils/localStorage';
+export default function Akses({ navigation }) {
+
+  const [lampu, setLampu] = useState(false);
+  const [barcode, setBarcode] = useState('');
+
+  const onSuccess = e => {
+    console.log(e.data);
+    setBarcode(e.data);
+    axios.post(urlAPI + '1_get_member.php', {
+      key: e.data
+    }).then(res => {
+      console.log(res.data);
+      navigation.navigate('Tambah', res.data)
+    })
+  };
+
+
   return (
-    <View
-      style={{
-        flex: 1,
-        padding: 10,
-      }}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Masuk', {
-          jenis: route.params.jenis
-        })}
-        style={{
-          flex: 1,
-          backgroundColor: colors.primary,
-          padding: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 10,
-          borderRadius: 10,
+    <QRCodeScanner
+      onRead={onSuccess}
+      type={RNCamera.Constants.Type.back}
+      autoFocus={RNCamera.Constants.AutoFocus.on}
+      flashMode={lampu ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.off}
+      topContent={
+        <View style={{
         }}>
-        <Icon
-          type="ionicon"
-          name="log-in"
-          size={windowWidth / 4}
-          color={colors.white}
-        />
-        <Text
-          style={{
-            fontFamily: fonts.secondary[600],
-            color: colors.white,
-            fontSize: windowWidth / 15,
+
+          <Text style={styles.centerText}>
+            Silahkan scan barcode Member
+          </Text>
+
+
+        </View>
+      }
+      bottomContent={
+
+        <>
+          {!lampu && <TouchableOpacity onPress={() => setLampu(true)} style={{
+            backgroundColor: colors.primary,
+            padding: 20,
+            borderRadius: 10,
           }}>
-          ABSEN MASUK
-        </Text>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[600],
-            color: colors.white,
-            fontSize: windowWidth / 15,
+            <Icon type='ionicon' name='flash-off' color={colors.white} />
+          </TouchableOpacity>}
+
+          {lampu && <TouchableOpacity onPress={() => setLampu(false)} style={{
+            backgroundColor: colors.primary,
+            padding: 20,
+            borderRadius: 10,
           }}>
-          {route.params.jenis}
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Keluar', {
-          jenis: route.params.jenis
-        })}
-        style={{
-          flex: 1,
-          backgroundColor: colors.primary,
-          padding: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 10,
-          borderRadius: 10,
-        }}>
-        <Icon
-          type="ionicon"
-          name="log-out"
-          size={windowWidth / 4}
-          color={colors.white}
-        />
-        <Text
-          style={{
-            fontFamily: fonts.secondary[600],
-            color: colors.white,
-            fontSize: windowWidth / 15,
+            <Icon type='ionicon' name='flash' color={colors.white} />
+          </TouchableOpacity>}
+
+          <TouchableOpacity onPress={() => {
+            storeData('user', null);
+            navigation.replace('GetStarted');
+          }} style={{
+
+            backgroundColor: colors.tertiary,
+            paddingHorizontal: 100,
+            paddingVertical: 20,
+            borderRadius: 10,
+            marginTop: 10,
+
           }}>
-          ABSEN PULANG
-        </Text>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[600],
-            color: colors.white,
-            fontSize: windowWidth / 15,
-          }}>
-          {route.params.jenis}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+            <Text style={{
+              fontFamily: fonts.secondary[600],
+              fontSize: windowWidth / 26
+            }}>Keluar</Text>
+          </TouchableOpacity>
+
+        </>
+
+      }
+    />
+  )
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  centerText: {
+    flex: 1,
+    fontSize: 18,
+    padding: 32,
+    color: '#777'
+  },
+  textBold: {
+    fontWeight: '500',
+    color: '#000'
+  },
+  buttonText: {
+    fontSize: 21,
+    color: 'rgb(0,122,255)'
+  },
+  buttonTouchable: {
+    padding: 16
+  }
+});

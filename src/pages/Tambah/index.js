@@ -1,162 +1,163 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
+  SafeAreaView,
+  Image,
+  Linking,
   ScrollView,
+  Alert,
+  ActivityIndicator
 } from 'react-native';
-import {fonts} from '../../utils/fonts';
-import {MyInput, MyGap, MyButton} from '../../components';
-import {colors} from '../../utils/colors';
+import { windowWidth, fonts } from '../../utils/fonts';
+import { getData, storeData, urlAPI } from '../../utils/localStorage';
+import { colors } from '../../utils/colors';
+import { MyButton, MyGap, MyInput } from '../../components';
+import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
-import {showMessage} from 'react-native-flash-message';
-import LottieView from 'lottie-react-native';
 
-export default function Tambah({navigation, route}) {
+export default function Tambah({ navigation, route }) {
+  const [user, setUser] = useState(route.params);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState({
-    nama: null,
-    tc: null,
-    ta: null,
-    r: null,
-    v: null,
-  });
 
-  const simpan = () => {
-    setLoading(true);
-    console.log(data);
-    axios.post('https://zavalabs.com/api/beton_add.php', data).then(res => {
-      console.log(res);
-      setTimeout(() => {
-        setLoading(false);
-        navigation.navigate('Success2', {
-          messege: 'Data berhasil ditambah',
-        });
-        setData({
-          nama: null,
-          tc: null,
-          ta: null,
-          r: null,
-          v: null,
-        });
-      }, 1000);
-    });
-  };
   return (
-    <ImageBackground
-      style={{
-        flex: 1,
-        padding: 10,
-      }}>
-      <ScrollView>
-        <View
-          style={{
+    <SafeAreaView style={{
+      flex: 1,
+      backgroundColor: colors.primary
+    }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ padding: 10 }}>
+          <View style={{
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: fonts.secondary[600],
-            }}>
-            Perhitungan Retak Susut
-          </Text>
-          <Text
-            style={{
-              fontSize: 14,
-              fontFamily: fonts.secondary[400],
-            }}>
-            (Plastic Shrinkage Cracking)
-          </Text>
+            <Image source={{
+              uri: user.foto_user,
+            }} style={{ width: 80, height: 80, borderRadius: 10, }} />
+          </View>
+
+          {/* data detail */}
+          <View style={{ padding: 10 }}>
+
+            <MyGap jarak={10} />
+            <View>
+              <View
+                style={{
+                  marginVertical: 3,
+                  padding: 10,
+                  backgroundColor: colors.white,
+                  borderRadius: 10,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.black,
+                  }}>
+                  Nama Pribadi
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[400],
+                    color: colors.primary,
+                  }}>
+                  {user.nama_lengkap}
+                </Text>
+              </View>
+
+
+              <View
+                style={{
+                  marginVertical: 3,
+                  padding: 10,
+                  backgroundColor: colors.white,
+                  borderRadius: 10,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.black,
+                  }}>
+                  E-mail
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[400],
+                    color: colors.primary,
+                  }}>
+                  {user.email}
+                </Text>
+              </View>
+              <View
+                style={{
+                  marginVertical: 3,
+                  padding: 10,
+                  backgroundColor: colors.white,
+                  borderRadius: 10,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.black,
+                  }}>
+                  Telepon / Whatsapp
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[400],
+                    color: colors.primary,
+                  }}>
+                  {user.telepon}
+                </Text>
+              </View>
+
+              <MyGap jarak={10} />
+
+              <MyInput autoFocus keyboardType="number-pad" iconname="duplicate" placeholder="masukan nominal belanja" label="Nominal" value={user.nominal} onChangeText={x => {
+                setUser({
+                  ...user,
+                  nominal: x
+                })
+              }} />
+
+
+
+
+
+
+            </View>
+          </View>
+
+          {/* button */}
+          <View style={{ padding: 10 }}>
+            {!loading && <MyButton
+              onPress={() => {
+
+                setLoading(true);
+
+                axios.post(urlAPI + '1_add_reward.php', user).then(res => {
+                  console.log(res.data);
+                  Alert.alert("Transaksi Reward Point Berhasil !", "Terima kasih")
+                  navigation.replace('Akses');
+                })
+
+
+
+              }}
+              title="Simpan Transaksi"
+              colorText={colors.primary}
+              iconColor={colors.primary}
+              warna={colors.tertiary}
+              Icons="create-outline"
+            />}
+
+            {loading && <ActivityIndicator size="large" color={colors.white} />}
+          </View>
         </View>
-
-        <MyGap jarak={10} />
-        <MyInput
-          label="Masukan temperatur udara (Celcius)"
-          keyboardType="decimal-pad"
-          iconname="thermometer"
-          value={data.tc}
-          onChangeText={value =>
-            setData({
-              ...data,
-              tc: value,
-            })
-          }
-        />
-
-        <MyGap jarak={10} />
-        <MyInput
-          label="Masukan temperatur beton segar (Celcius)"
-          keyboardType="decimal-pad"
-          iconname="thermometer-outline"
-          value={data.ta}
-          onChangeText={value =>
-            setData({
-              ...data,
-              ta: value,
-            })
-          }
-        />
-        <MyGap jarak={10} />
-        <MyInput
-          label="Masukan kelembaban relatif (%)"
-          keyboardType="decimal-pad"
-          iconname="cloudy-outline"
-          value={data.r}
-          onChangeText={value =>
-            setData({
-              ...data,
-              r: value,
-            })
-          }
-        />
-        <MyGap jarak={10} />
-        <MyInput
-          label="Masukan kecepatan angin (km per jam/kph)"
-          keyboardType="decimal-pad"
-          iconname="pulse"
-          value={data.v}
-          onChangeText={value =>
-            setData({
-              ...data,
-              v: value,
-            })
-          }
-        />
-        <MyGap jarak={10} />
-        <MyInput
-          label="Keterangan"
-          label2="(Masukan keterangan cuaca hujan/kering, kondisi pekerja , dll)"
-          iconname="newspaper-outline"
-          value={data.nama}
-          onChangeText={value =>
-            setData({
-              ...data,
-              nama: value,
-            })
-          }
-        />
-        <MyGap jarak={10} />
-        <MyButton
-          warna={colors.secondary}
-          title="SIMPAN DATA"
-          Icons="log-in"
-          onPress={simpan}
-        />
       </ScrollView>
-      {loading && (
-        <LottieView
-          source={require('../../assets/animation.json')}
-          autoPlay
-          loop
-          style={{
-            flex: 1,
-            backgroundColor: colors.white,
-          }}
-        />
-      )}
-    </ImageBackground>
+    </SafeAreaView>
   );
 }
 

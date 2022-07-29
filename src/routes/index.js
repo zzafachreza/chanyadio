@@ -176,7 +176,28 @@ export default function Router() {
         name="Laporan"
         component={Laporan}
         options={{
-          headerShown: false,
+          headerTitle: 'History',
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary
+          },
+          headerTintColor: colors.white,
+
+          cardStyleInterpolator: ({ current, layouts }) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+
         }}
       />
       <Stack.Screen
@@ -901,7 +922,7 @@ export default function Router() {
         name="Tambah"
         component={Tambah}
         options={({ route, navigation }) => ({
-          title: 'TAMBAH',
+          title: 'Informasi Akun',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,

@@ -79,7 +79,7 @@ export default function Home({ navigation }) {
   //     setKategori(res.data);
   //   })
   // }
-
+  const [point, setPoint] = useState(0);
 
   const __getDataUserInfo = () => {
 
@@ -92,16 +92,32 @@ export default function Home({ navigation }) {
       // console.log(users);
       setUser(users);
 
+      if (users.tipe == "KASIR") {
+        navigation.replace('Akses')
+      }
+
+      axios.post(urlAPI + '1_get_point.php', {
+        fid_user: users.id
+      }).then(rx => {
+        console.warn(rx.data);
+        setPoint(rx.data);
+        setUser({
+          ...users,
+          point: rx.data
+        })
+      })
+
       getData('token').then(res => {
         console.log('data token,', res);
         setToken(res.token);
         axios
-          .post(urlAPI + '/update_token.php', {
+          .post(urlAPI + 'update_token.php', {
             id: users.id,
             token: res.token,
           })
           .then(res => {
             console.error('update token', res.data);
+
           });
       });
     });
@@ -114,10 +130,7 @@ export default function Home({ navigation }) {
 
   const __renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate('Barang', {
-        key: item.id,
-        id_user: user.id
-      })} style={{
+      <TouchableOpacity style={{
         flex: 1,
         marginVertical: 10,
         marginHorizontal: 10,
@@ -249,7 +262,7 @@ export default function Home({ navigation }) {
                   left: 10,
                   fontFamily: fonts.secondary[600],
                   fontSize: windowWidth / 26,
-                }}>350000</Text>
+                }}>{new Intl.NumberFormat().format(point)}</Text>
               </View>
             </View>
           </View>
@@ -307,7 +320,7 @@ export default function Home({ navigation }) {
           </View>
 
           <View>
-            <TouchableOpacity style={{
+            <TouchableOpacity onPress={() => navigation.navigate('Laporan', user)} style={{
               padding: 20,
               backgroundColor: colors.primary,
               borderRadius: 10,
@@ -391,7 +404,7 @@ export default function Home({ navigation }) {
             size={300}
             logoSize={50}
             logo={require('../../assets/qr.png')}
-            value="Just some string value"
+            value={user.barcode}
 
           />
         </View>

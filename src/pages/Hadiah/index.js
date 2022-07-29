@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  Alert,
   FlatList,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -16,6 +17,7 @@ import { fonts, windowWidth } from '../../utils/fonts';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 import { urlAPI } from '../../utils/localStorage';
+
 
 export default function Hadiah({ navigation, route }) {
 
@@ -35,7 +37,41 @@ export default function Hadiah({ navigation, route }) {
     return (
       <TouchableOpacity
         style={styles.card}
-        onPress={() => navigation.navigate('Redeem', item)}
+        onPress={() => {
+          if (user.point < item.nilai) {
+            Alert.alert("Redeem Point", "Maaf point Adna tidak cukup !")
+          } else {
+            Alert.alert(
+              "Redeem Point",
+              "Apakah Anda akan menukar point dengan " + item.judul + ' ?',
+              [
+
+                {
+                  text: "Cancel",
+                  onPress: () => console.log("Cancel Pressed"),
+                  style: "cancel"
+                },
+                {
+                  text: "OK", onPress: () => {
+
+                    axios.post(urlAPI + '1_add_redeem.php', {
+                      fid_user: user.id,
+                      fid_hadiah: item.id,
+                      point: item.nilai
+
+                    }).then(res => {
+                      console.log(res.data);
+                      Alert.alert("Selamat Redeem Berhasil !", "Terima kasih sudah melakukan redeem point");
+                      navigation.replace('MainApp')
+
+                    })
+
+                  }
+                }
+              ]
+            );
+          }
+        }}
         activeOpacity={1.0}>
         <View
           style={{
@@ -132,7 +168,7 @@ export default function Hadiah({ navigation, route }) {
               left: 10,
               fontFamily: fonts.secondary[600],
               fontSize: windowWidth / 26,
-            }}>350000</Text>
+            }}>{new Intl.NumberFormat().format(user.point)}</Text>
           </View>
         </View>
       </View>
