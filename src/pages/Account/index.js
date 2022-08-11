@@ -65,9 +65,9 @@ export default function Account({ navigation, route }) {
           <MyButton
             onPress={() => navigation.navigate('EditProfile', user)}
             title="Edit Profile"
-            colorText={colors.white}
-            iconColor={colors.white}
-            warna={colors.secondary}
+            colorText={colors.black}
+            iconColor={colors.black}
+            warna={colors.warning}
             Icons="create-outline"
           />
 

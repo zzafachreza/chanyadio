@@ -131,12 +131,10 @@ export default function Home({ navigation }) {
   const __renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('Brand', item)} style={{
-        elevation: 3,
         flex: 1,
         overflow: 'hidden',
         marginVertical: 10,
         marginHorizontal: 10,
-        borderRadius: 10,
       }}>
 
         <Image style={{
@@ -153,18 +151,14 @@ export default function Home({ navigation }) {
 
         </View>
         <View style={{
-          padding: 10,
+          paddingVertical: 10,
         }}>
           <Text style={{
-            color: colors.secondary,
+            color: colors.black,
+            textAlign: 'center',
             fontFamily: fonts.primary.normal,
             fontSize: windowWidth / 20,
           }}>{item.judul}</Text>
-          <Text style={{
-            color: colors.secondary,
-            fontFamily: fonts.secondary[400],
-            fontSize: windowWidth / 25,
-          }}>{item.periode}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -196,23 +190,28 @@ export default function Home({ navigation }) {
             }}>
               <Text style={{
                 fontFamily: fonts.secondary[400],
-                fontSize: windowWidth / 20,
+                fontSize: windowWidth / 25,
                 color: colors.white
               }}>Selamat datang !</Text>
               <Text style={{
                 fontFamily: fonts.primary.normal,
-                fontSize: windowWidth / 10,
+                fontSize: windowWidth / 20,
                 color: colors.white
-              }}>Chanya Dio</Text>
+              }}>{user.nama_lengkap}</Text>
             </View>
             <View style={{
               justifyContent: 'center',
               alignItems: 'center'
             }}>
               <Image source={require('../../assets/logo.png')} style={{
-                width: 70,
+                width: 40,
                 height: 40
               }} />
+              <Text style={{
+                fontFamily: fonts.primary.normal,
+                fontSize: windowWidth / 30,
+                color: colors.white
+              }}>Chanya Dio</Text>
             </View>
           </View>
 
@@ -230,40 +229,14 @@ export default function Home({ navigation }) {
               fontFamily: fonts.secondary[600],
               fontSize: windowWidth / 30,
               marginBottom: 10,
-            }}>My Poin</Text>
+            }}>Pointku</Text>
 
             <View style={{
               flexDirection: 'row'
             }}>
-
-              <View>
-                <Image source={{
-                  uri: user.foto_user
-                }} style={{
-                  width: 50, height: 50,
-                  borderRadius: 25,
-                }} />
-              </View>
               <View style={{
                 flex: 1,
-                justifyContent: 'center',
-                paddingLeft: 10,
-              }}>
-                <Text style={{
-                  fontFamily: fonts.secondary[600],
-                  fontSize: windowWidth / 27,
-                }}>{user.nama_lengkap}</Text>
-              </View>
-              <View style={{
-                borderRightWidth: 2,
-                borderRightColor: colors.primary,
-                marginHorizontal: 5,
-
-              }} />
-              <View style={{
-                justifyContent: 'center',
                 alignItems: 'center',
-                flex: 1,
                 flexDirection: 'row'
               }}>
                 <Image source={require('../../assets/coin.png')} style={{
@@ -276,6 +249,34 @@ export default function Home({ navigation }) {
                   fontSize: windowWidth / 26,
                 }}>{new Intl.NumberFormat().format(point)}</Text>
               </View>
+              <View style={{
+                borderRightWidth: 2,
+                borderRightColor: colors.primary,
+                marginHorizontal: 5,
+
+              }} />
+
+              <TouchableOpacity onPress={() => navigation.navigate('Laporan', user)} style={{
+                flex: 1,
+                paddingVertical: 10,
+                borderRadius: 10,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <Image source={require('../../assets/riwayat.png')} style={{
+                  width: 17,
+                  height: 17,
+                }} />
+                <Text style={{
+                  color: colors.black,
+                  fontFamily: fonts.secondary[600],
+                  fontSize: windowWidth / 26,
+                  left: 10,
+                }}>Riwayat</Text>
+              </TouchableOpacity>
+
+
             </View>
           </View>
 
@@ -290,10 +291,12 @@ export default function Home({ navigation }) {
           flexDirection: 'row',
           paddingHorizontal: 10,
           justifyContent: 'space-around',
-          marginRight: 10,
           alignItems: 'center'
         }}>
-          <View>
+          <View style={{
+            flex: 1,
+            marginRight: 5,
+          }}>
             <TouchableOpacity onPress={onOpen} style={{
               padding: 20,
               backgroundColor: colors.primary,
@@ -309,10 +312,13 @@ export default function Home({ navigation }) {
               color: colors.primary,
               fontFamily: fonts.primary.normal,
               fontSize: windowWidth / 20,
-            }}>QR Code</Text>
+            }}>Kode QR</Text>
           </View>
 
-          <View>
+          <View style={{
+            flex: 1,
+            marginLeft: 5,
+          }}>
             <TouchableOpacity onPress={() => navigation.navigate('Hadiah', user)} style={{
               padding: 20,
               backgroundColor: colors.primary,
@@ -328,32 +334,15 @@ export default function Home({ navigation }) {
               color: colors.primary,
               fontFamily: fonts.primary.normal,
               fontSize: windowWidth / 20,
-            }}>Redeem</Text>
+            }}>Penukaran</Text>
           </View>
 
-          <View>
-            <TouchableOpacity onPress={() => navigation.navigate('Laporan', user)} style={{
-              padding: 20,
-              backgroundColor: colors.primary,
-              borderRadius: 10,
-              elevation: 3,
-            }}>
-              <Icon size={windowWidth / 8} type='ionicon' name="file-tray-full-outline" color={colors.white} />
 
-            </TouchableOpacity>
-            <Text style={{
-              marginTop: 10,
-              textAlign: 'center',
-              color: colors.primary,
-              fontFamily: fonts.primary.normal,
-              fontSize: windowWidth / 20,
-            }}>History</Text>
-          </View>
         </View>
 
         <View style={{
           padding: 10,
-          marginTop: 10,
+          marginTop: 0,
           flexDirection: 'row'
         }}>
           <Text style={{
@@ -363,16 +352,17 @@ export default function Home({ navigation }) {
           }}>News</Text>
           <View style={{
             flex: 1,
-            paddingTop: 10,
+            paddingTop: 11,
           }}>
             <View style={{
+              borderTopColor: colors.tertiary,
               marginHorizontal: 10,
               borderTopWidth: 1,
             }} />
           </View>
         </View>
 
-        <FlatList data={promo} renderItem={__renderItem} />
+        <FlatList showsVerticalScrollIndicator={false} data={promo} renderItem={__renderItem} />
 
       </ScrollView>
       <Modalize

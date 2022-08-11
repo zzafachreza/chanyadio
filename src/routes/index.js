@@ -176,7 +176,7 @@ export default function Router() {
         name="Laporan"
         component={Laporan}
         options={{
-          headerTitle: 'History',
+          headerTitle: 'Riwayat',
           headerShown: true,
           headerStyle: {
             backgroundColor: colors.primary
@@ -459,8 +459,8 @@ export default function Router() {
         name="Hadiah"
         component={Hadiah}
         options={({ route, navigation }) => ({
-          title: 'Daftar Hadiah',
-          headerShown: false,
+          title: 'Penukaran',
+          headerShown: true,
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,

@@ -102,7 +102,7 @@ export default function Hadiah({ navigation, route }) {
             borderBottomLeftRadius: 10,
             paddingHorizontal: 20,
             textAlign: 'center',
-            color: colors.primary,
+            color: colors.white,
           }}>
           {item.nilai} Point
         </Text>
@@ -112,6 +112,12 @@ export default function Hadiah({ navigation, route }) {
 
   return (
     <View style={{ flex: 1 }}>
+      <Text style={{
+        fontFamily: fonts.secondary[400],
+        fontSize: windowWidth / 30,
+        marginVertical: 5,
+        textAlign: 'center'
+      }}>Tambah terus pointmu</Text>
       <View style={{
         margin: 10,
         backgroundColor: colors.white,
@@ -120,33 +126,31 @@ export default function Hadiah({ navigation, route }) {
         elevation: 3,
 
       }}>
-        <Text style={{
-          fontFamily: fonts.secondary[600],
-          fontSize: windowWidth / 30,
-          marginBottom: 10,
-        }}>My Poin</Text>
+
 
         <View style={{
           flexDirection: 'row'
         }}>
 
-          <View>
-            <Image source={{
-              uri: user.foto_user
-            }} style={{
-              width: 50, height: 50,
-              borderRadius: 25,
-            }} />
-          </View>
+
           <View style={{
             flex: 1,
             justifyContent: 'center',
             paddingLeft: 10,
           }}>
-            <Text style={{
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 27,
-            }}>{user.nama_lengkap}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Laporan', user)} style={{
+              backgroundColor: colors.primary,
+              padding: 10,
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <Text style={{
+                fontFamily: fonts.secondary[600],
+                fontSize: windowWidth / 27,
+                color: colors.white,
+              }}>Riwayat</Text>
+            </TouchableOpacity>
           </View>
           <View style={{
             borderRightWidth: 2,

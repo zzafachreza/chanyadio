@@ -55,7 +55,7 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
 
         if (label === 'Home') {
           iconName = 'home-outline';
-          Newlabel = 'Home';
+          Newlabel = 'Beranda';
         } else if (label === 'Account') {
           iconName = 'person-outline';
           Newlabel = 'Akun';
@@ -110,13 +110,13 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
                   name={isFocused ? iconName.replace('-outline', '') : iconName}
                   type="ionicon"
                   size={windowWidth / 20}
-                  color={isFocused ? colors.white : colors.white}
+                  color={isFocused ? colors.tertiary : colors.white}
                 />
 
                 <Text
                   style={{
                     fontSize: windowWidth / 45,
-                    color: isFocused ? colors.white : colors.white,
+                    color: isFocused ? colors.tertiary : colors.white,
                   }}>
                   {Newlabel}
                 </Text>
