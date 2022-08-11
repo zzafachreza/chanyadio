@@ -81,7 +81,7 @@ export default function Laporan({ route }) {
                                         <Image style={{
                                             width: 20,
                                             resizeMode: 'contain'
-                                        }} source={require('../../assets/coin.png')} />
+                                        }} source={i.tipe === "redeem" ? require('../../assets/coin.png') : require('../../assets/coin2.png')} />
                                     </View>
                                     <View>
                                         <Text style={{

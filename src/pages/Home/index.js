@@ -229,7 +229,7 @@ export default function Home({ navigation }) {
               fontFamily: fonts.secondary[600],
               fontSize: windowWidth / 30,
               marginBottom: 10,
-            }}>Pointku</Text>
+            }}>Poinku</Text>
 
             <View style={{
               flexDirection: 'row'
@@ -237,10 +237,12 @@ export default function Home({ navigation }) {
               <View style={{
                 flex: 1,
                 alignItems: 'center',
+
                 flexDirection: 'row'
               }}>
-                <Image source={require('../../assets/coin.png')} style={{
+                <Image source={require('../../assets/coin2.png')} style={{
                   width: 20,
+                  marginLeft: 30,
                   resizeMode: 'contain',
                 }} />
                 <Text style={{
