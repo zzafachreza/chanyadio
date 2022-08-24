@@ -6,13 +6,14 @@ export const windowHeight = Dimensions.get('window').height;
 
 export const fonts = {
   primary: {
-    300: 'Poppins-Light',
+    300: 'Futura-Light',
     400: 'Poppins-Regular',
     600: 'Poppins-SemiBold',
-    700: 'Poppins-Bold',
-    800: 'Poppins-ExtraBold',
-    900: 'Poppins-Black',
+    700: 'Futura-Bold',
+    800: 'Futura-ExtraBold',
+    900: 'Futura-Black',
     normal: 'Futura-Medium',
+    demi: 'Futura-Demi',
   },
   secondary: {
     200: 'Montserrat-ExtraLight',

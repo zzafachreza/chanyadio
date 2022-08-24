@@ -30,7 +30,7 @@ export default function Brand({ route }) {
         flex: 1,
       }}>
         <View style={{
-          padding: 20,
+          padding: 35,
         }}>
           <Image style={{
             width: '100%',
@@ -49,8 +49,9 @@ export default function Brand({ route }) {
         </View>
         <View style={{
           padding: 10,
-          backgroundColor: colors.warning,
-          margin: 10,
+          backgroundColor: colors.kotakDesc,
+          // margin: 10,
+          paddingBottom: 50,
           borderTopRightRadius: 10,
           borderTopLeftRadius: 10,
         }}>
@@ -58,7 +59,7 @@ export default function Brand({ route }) {
             marginTop: -30,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: colors.tertiary,
+            backgroundColor: colors.kotakJudul,
             width: '85%',
             borderRadius: 10,
             padding: 5,
@@ -66,15 +67,15 @@ export default function Brand({ route }) {
           }}>
             <Text style={{
               color: colors.white,
-              fontFamily: fonts.primary.normal,
+              fontFamily: fonts.primary.demi,
               fontSize: windowWidth / 15,
               textAlign: 'center'
             }}>{item.judul}</Text>
           </View>
           <Text style={{
             marginTop: 20,
-            color: colors.tertiary,
-            fontFamily: fonts.secondary[400],
+            color: colors.kotakJudul,
+            fontFamily: fonts.primary.demi,
             fontSize: windowWidth / 25,
             textAlign: 'center'
           }}>{item.periode}</Text>
@@ -86,19 +87,21 @@ export default function Brand({ route }) {
           }}>
             <Text style={{
 
-              color: colors.black,
+              color: colors.kotakText,
               textAlign: 'justify',
-              fontFamily: fonts.primary.normal,
-              fontSize: windowWidth / 25,
+              fontFamily: fonts.primary[300],
+              fontSize: windowWidth / 20,
             }}>{item.desc}</Text>
           </View>
         </View>
       </View>
       <Text style={{
         margin: 10,
-        fontFamily: fonts.primary.normal,
+        fontFamily: fonts.primary.demi,
         textAlign: 'center',
-        color: colors.warning
+        fontSize: windowWidth / 25,
+        marginBottom: 20,
+        color: '#FFB8A6'
       }}>Chanya Dio Parfum</Text>
     </SafeAreaView>
   )

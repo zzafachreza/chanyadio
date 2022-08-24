@@ -18,6 +18,8 @@ import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
+import CurrencyInput from 'react-native-currency-input';
+
 
 export default function Tambah({ navigation, route }) {
   const [user, setUser] = useState(route.params);
@@ -115,7 +117,34 @@ export default function Tambah({ navigation, route }) {
 
               <MyGap jarak={10} />
 
-              <MyInput autoFocus keyboardType="number-pad" iconname="duplicate" placeholder="masukan nominal belanja" label="Nominal" value={user.nominal} onChangeText={x => {
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingVertical: 5,
+                }}>
+                <Icon type="ionicon" name="apps-outline" color={colors.white} size={16} />
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.white,
+                    left: 10,
+                    fontSize: 12,
+                  }}>
+                  Nominal
+                </Text>
+              </View>
+              <CurrencyInput delimiter=',' precision={0} style={{
+                backgroundColor: colors.secondary,
+                borderColor: colors.primary,
+                borderRadius: 10,
+                borderWidth: 1,
+                paddingLeft: 10,
+                color: colors.white,
+                fontSize: 12,
+                fontFamily: fonts.primary[400],
+              }} value={user.nominal} onChangeValue={x => {
                 setUser({
                   ...user,
                   nominal: x
@@ -147,8 +176,8 @@ export default function Tambah({ navigation, route }) {
 
               }}
               title="Simpan Transaksi"
-              colorText={colors.primary}
-              iconColor={colors.primary}
+              colorText={colors.white}
+              iconColor={colors.white}
               warna={colors.tertiary}
               Icons="create-outline"
             />}

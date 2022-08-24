@@ -33,6 +33,8 @@ export default function Akses({ navigation }) {
   };
 
 
+
+
   return (
     <QRCodeScanner
       onRead={onSuccess}
@@ -82,8 +84,9 @@ export default function Akses({ navigation }) {
 
           }}>
             <Text style={{
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 26
+              fontFamily: fonts.primary.demi,
+              fontSize: windowWidth / 26,
+              color: colors.white
             }}>Keluar</Text>
           </TouchableOpacity>
 
