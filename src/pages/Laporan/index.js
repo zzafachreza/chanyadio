@@ -93,14 +93,31 @@ export default function Laporan({ route }) {
                                     </View>
                                 </View>
                             </View>
-                            <Text style={{
-                                left: 5,
-                                fontFamily: fonts.secondary[400],
-                                fontSize: windowWidth / 35,
-                                color: colors.secondary,
-                                textAlign: 'right',
-                                paddingRight: 10,
-                            }}>{i.tanggal} {i.jam}</Text>
+                            <View style={{
+                                flexDirection: 'row'
+                            }}>
+                                {i.keterangan !== "" && <Text style={{
+                                    // flex: 1,
+                                    fontFamily: fonts.secondary[400],
+                                    fontSize: windowWidth / 35,
+                                    color: colors.primary,
+                                    backgroundColor: colors.primary,
+                                    color: colors.white,
+                                    textAlign: 'center',
+                                    paddingHorizontal: 5,
+                                    paddingVertical: 2,
+                                    borderRadius: 3,
+                                }}>{i.keterangan}</Text>}
+                                <Text style={{
+                                    left: 5,
+                                    flex: 1,
+                                    fontFamily: fonts.secondary[400],
+                                    fontSize: windowWidth / 35,
+                                    color: colors.secondary,
+                                    textAlign: 'right',
+                                    paddingRight: 10,
+                                }}>{i.tanggal} {i.jam}</Text>
+                            </View>
                         </View>
                     )
                 })}
