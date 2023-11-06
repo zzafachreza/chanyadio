@@ -48,66 +48,109 @@ export default function Laporan({ route }) {
                                 fontFamily: fonts.secondary[400],
                                 fontSize: windowWidth / 28
                             }}>{i.tipe === "redeem" ? "Penukaran Berhasil" : "Penambahan poin berhasil"}</Text>
-                            <View style={{
-                                paddingVertical: 5,
-                                flexDirection: 'row',
-                                alignItems: 'center'
-                            }}>
-                                <View>
-                                    <Image style={{
-                                        width: 20,
-                                        height: i.tipe == "redeem" ? 20 : 12,
-                                        resizeMode: 'contain'
-                                    }} source={i.tipe == "redeem" ? require('../../assets/parfum.png') : require('../../assets/uang.png')} />
-                                </View>
-                                <View style={{
-                                    flex: 1,
-                                }}>
-                                    <Text style={{
-                                        left: 5,
-                                        fontFamily: fonts.secondary[400],
-                                        fontSize: windowWidth / 30
-                                    }}>{i.tipe === "redeem" ? i.nama_hadiah : 'Rp ' + new Intl.NumberFormat().format(i.nominal)}</Text>
-                                </View>
 
+                            {i.keterangan === "" &&
                                 <View style={{
-                                    flex: 0.5,
+                                    paddingVertical: 5,
                                     flexDirection: 'row',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    paddingLeft: 10,
+                                    alignItems: 'center'
                                 }}>
                                     <View>
                                         <Image style={{
                                             width: 20,
+                                            height: i.tipe == "redeem" ? 20 : 12,
                                             resizeMode: 'contain'
-                                        }} source={i.tipe === "redeem" ? require('../../assets/coin.png') : require('../../assets/coin2.png')} />
+                                        }} source={i.tipe == "redeem" ? require('../../assets/parfum.png') : require('../../assets/uang.png')} />
                                     </View>
-                                    <View>
+                                    <View style={{
+                                        flex: 1,
+                                    }}>
                                         <Text style={{
                                             left: 5,
-                                            color: i.tipe === "redeem" ? colors.tertiary : colors.black,
-                                            fontFamily: fonts.secondary[600],
+                                            fontFamily: fonts.secondary[400],
                                             fontSize: windowWidth / 30
-                                        }}>{i.tipe === "redeem" ? '-' : '+'} {i.point}</Text>
+                                        }}>{i.tipe === "redeem" ? i.nama_hadiah : 'Rp ' + new Intl.NumberFormat().format(i.nominal)}</Text>
+                                    </View>
+
+                                    <View style={{
+                                        flex: 0.5,
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        paddingLeft: 10,
+                                    }}>
+                                        <View>
+                                            <Image style={{
+                                                width: 20,
+                                                resizeMode: 'contain'
+                                            }} source={i.tipe === "redeem" ? require('../../assets/coin.png') : require('../../assets/coin2.png')} />
+                                        </View>
+                                        <View>
+                                            <Text style={{
+                                                left: 5,
+                                                color: i.tipe === "redeem" ? colors.tertiary : colors.black,
+                                                fontFamily: fonts.secondary[600],
+                                                fontSize: windowWidth / 30
+                                            }}>{i.tipe === "redeem" ? '-' : '+'} {i.point}</Text>
+                                        </View>
                                     </View>
                                 </View>
-                            </View>
+                            }
+
+
+                            {i.keterangan !== "" &&
+                                <View style={{
+                                    paddingVertical: 5,
+                                    flexDirection: 'row',
+                                    alignItems: 'center'
+                                }}>
+                                    <View>
+                                    </View>
+                                    <View style={{
+                                        flex: 1,
+                                    }}>
+                                        <Text style={{
+
+                                            fontFamily: fonts.secondary[400],
+                                            fontSize: windowWidth / 35,
+                                            color: colors.primary,
+                                            backgroundColor: colors.primary,
+                                            color: colors.white,
+                                            textAlign: 'center',
+                                            paddingHorizontal: 5,
+                                            paddingVertical: 2,
+                                            borderRadius: 3,
+                                        }}>{i.keterangan}</Text>
+                                    </View>
+
+                                    <View style={{
+                                        flex: 0.5,
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        paddingLeft: 10,
+                                    }}>
+                                        <View>
+                                            <Image style={{
+                                                width: 20,
+                                                resizeMode: 'contain'
+                                            }} source={i.tipe === "redeem" ? require('../../assets/coin.png') : require('../../assets/coin2.png')} />
+                                        </View>
+                                        <View>
+                                            <Text style={{
+                                                left: 5,
+                                                color: i.tipe === "redeem" ? colors.tertiary : colors.black,
+                                                fontFamily: fonts.secondary[600],
+                                                fontSize: windowWidth / 30
+                                            }}>{i.tipe === "redeem" ? '-' : '+'} {i.point}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            }
                             <View style={{
                                 flexDirection: 'row'
                             }}>
-                                {i.keterangan !== "" && <Text style={{
-                                    // flex: 1,
-                                    fontFamily: fonts.secondary[400],
-                                    fontSize: windowWidth / 35,
-                                    color: colors.primary,
-                                    backgroundColor: colors.primary,
-                                    color: colors.white,
-                                    textAlign: 'center',
-                                    paddingHorizontal: 5,
-                                    paddingVertical: 2,
-                                    borderRadius: 3,
-                                }}>{i.keterangan}</Text>}
+
                                 <Text style={{
                                     left: 5,
                                     flex: 1,
